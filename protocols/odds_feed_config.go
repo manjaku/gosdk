@@ -75,6 +75,7 @@ type OddsFeedConfiguration interface {
 	SelectedRegion() Region
 	SetRegion(region Region) OddsFeedConfiguration
 	ExchangeName() string
+	SetExchangeName(exchangeName string) OddsFeedConfiguration
 	ReplayExchangeName() string
 	ReportExtendedData() bool
 	SetAPIURL(url string) OddsFeedConfiguration
@@ -82,4 +83,6 @@ type OddsFeedConfiguration interface {
 	SetMessagingPort(port int) OddsFeedConfiguration
 	APIURL() (string, error)
 	MQURL() (string, error)
+	SportIDPrefix() string
+	SetSportIDPrefix(prefix string) OddsFeedConfiguration
 }

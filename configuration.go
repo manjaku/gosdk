@@ -14,10 +14,17 @@ type configuration struct {
 	reportExtendedData          bool
 	forcedAPIURL                string
 	forcedMQURL                 string
+	exchangeName                string
+	sportIDPrefix               string
 }
 
 func (o configuration) ExchangeName() string {
-	return "oddinfeed"
+	return o.exchangeName
+}
+
+func (o configuration) SetExchangeName(exchangeName string) protocols.OddsFeedConfiguration {
+	o.exchangeName = exchangeName
+	return o
 }
 
 func (o configuration) ReplayExchangeName() string {
@@ -96,6 +103,15 @@ func (o configuration) MQURL() (string, error) {
 	return o.forcedMQURL, nil
 }
 
+func (o configuration) SportIDPrefix() string {
+	return o.sportIDPrefix
+}
+
+func (o configuration) SetSportIDPrefix(prefix string) protocols.OddsFeedConfiguration {
+	o.sportIDPrefix = prefix
+	return o
+}
+
 // NewConfiguration ...
 func NewConfiguration(accessToken string, environment protocols.Environment, nodeID int, reportExtendedData bool) protocols.OddsFeedConfiguration {
 	return &configuration{
@@ -108,5 +124,7 @@ func NewConfiguration(accessToken string, environment protocols.Environment, nod
 		selectedRegion:              protocols.DefaulRegion,
 		sdkNodeID:                   &nodeID,
 		reportExtendedData:          reportExtendedData,
+		exchangeName:                "oddinfeed",
+		sportIDPrefix:               "od:sport:",
 	}
 }
